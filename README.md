@@ -75,8 +75,44 @@ Let `m` be Cheryl's birthday month and `d` the day. Now we can reason about them
 ([:July 14] [:July 16] [:August 14] [:August 15] [:August 17])
 ```
 
-Awesome.
+Awesome. The rest of this should be straightforward, we did all the hard work for the first rule. Note that we can't just add in the other statements into the first `run*` statement - these are separate assertions. Albert can't not know and know Cheryl's birthday at the same time - and a `run*` is like a snapshot. So we need to separate each line of dialogue out, and feed the results of the previous one into the next one. Logicians use *dynamic epistemology* to analyze this type of situation - if you're interested, you can look up the Muddy Children problem (easier) and [xkcd's take](https://www.xkcd.com/blue_eyes.html) (harder).
 
 > Bernard: “I didn’t know originally, but now I do.”
+
+If Bernard knows Cheryl's birthday, then there must be only one month corresponding to the day he already knows, `d`.
+
+```clojure
+(defn second-rule [days]
+  (run* [m d]
+        (membero [m d] days)
+        (pred [days d] unique-month-for-day?)))
+```
+
+Finally,
 > Albert: “Well, now I know, too!”
 
+If Albert knows Cheryl's birthday, then there must be only one day corresponding to the month he already knows, `m`.
+
+```clojure
+(defn third-rule [days]
+  (run* [m d]
+        (membero [m d] days)
+        (pred [days m] unique-day-for-month?)))
+```
+
+That wasn't so bad. Putting it all together, we should come up with Cheryl's birthday! Let's try it out.
+
+```clojure
+(defn solve []
+  (-> all-days
+      first-rule
+      second-rule
+      third-rule))
+=> (solve)
+([:July 16])
+```
+
+The only possible date that matches all the criteria is July 16.
+By now, Cheryl, Albert, and Bernard have become best friends - not to mention, top-notch logicians. 
+
+I hope you enjoyed! Let me know at [rajk@berkeley.edu](rajk@berkeley.edu) or the issues page if you have any suggestions or feedback.
