@@ -1,7 +1,7 @@
 # cheryl
 Solving Cheryl's Birthday with clojure.core.logic
 
-This project was largely inspired by John Feminella's [Solving the "Cheryl's Birthday" Problem with Prolog ](http://jxf.me/entries/cheryls-birthday/). If you don't know this puzzle, that post has a good description at the top.
+This project was largely inspired by John Feminella's [Solving the "Cheryl's Birthday" Problem with Prolog ](http://jxf.me/entries/cheryls-birthday/). If you don't know this puzzle, that post has a good description at the top. This writeup assumes you know the basics of Clojure (or any Lisp) but nothing about clojure.core.logic.
 
 In core.logic (and other declarative languages like Prolog), we say what the answer looks like, and the engine finds it for us. This is in contrast with the imperative way, where we search for the answer ourself. So for a quick example:
 
