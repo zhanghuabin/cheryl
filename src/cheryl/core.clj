@@ -46,3 +46,7 @@
       first-rule
       second-rule
       third-rule))
+
+(defrecord Node [id propositions relations reality])
+
+; [p]
